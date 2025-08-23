@@ -4,6 +4,7 @@ import { validatorCompiler, serializerCompiler, type ZodTypeProvider, jsonSchema
 import { createCoursesRoute } from './src/routes/create-course.ts'
 import { getCourseByIdRoute } from './src/routes/get-course-by-id.ts'
 import { getCoursesRoute } from './src/routes/get-courses.ts'
+import { deleteCourseRoute } from './src/routes/delete-course.ts'
 import scalarAPIReference from '@scalar/fastify-api-reference'
 
 const server = fastify({
@@ -42,6 +43,7 @@ server.setValidatorCompiler(validatorCompiler)
 server.register(createCoursesRoute)
 server.register(getCourseByIdRoute)
 server.register(getCoursesRoute)
+server.register(deleteCourseRoute)
 
 server.listen({ port: 3333 }).then(() => {
   console.log('HTTP server running!')
