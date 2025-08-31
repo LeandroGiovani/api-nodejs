@@ -6,6 +6,7 @@ import { getCourseByIdRoute } from './routes/get-course-by-id.ts'
 import { getCoursesRoute } from './routes/get-courses.ts'
 import { deleteCourseRoute } from './routes/delete-course.ts'
 import scalarAPIReference from '@scalar/fastify-api-reference'
+import { loginRoute } from './routes/login.ts'
 
 const server = fastify({
   logger: {
@@ -44,5 +45,6 @@ server.register(createCoursesRoute)
 server.register(getCourseByIdRoute)
 server.register(getCoursesRoute)
 server.register(deleteCourseRoute)
+server.register(loginRoute)
 
 export { server }

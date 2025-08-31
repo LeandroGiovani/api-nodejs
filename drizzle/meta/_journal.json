@@ -43,6 +43,13 @@
       "when": 1756067262278,
       "tag": "0005_friendly_black_knight",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1756247041830,
+      "tag": "0006_daily_micromacro",
+      "breakpoints": true
     }
   ]
 }
