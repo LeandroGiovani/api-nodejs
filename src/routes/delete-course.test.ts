@@ -2,14 +2,16 @@ import { test, expect } from "vitest"
 import supertest from "supertest"
 import { server } from "../app.ts"
 import { makeCourse } from "../tests/factories/make-course.ts";
+import { makeAuthenticatedUser } from "../tests/factories/make-user.ts";
 
 test("delete a course by id", async () => {
 
     await server.ready()
 
+    const { token } = await makeAuthenticatedUser('manager')
     const course = await makeCourse()
 
-    const response = await supertest(server.server).delete(`/courses/${course.id}`)
+    const response = await supertest(server.server).delete(`/courses/${course.id}`).set('Authorization', token)
 
     expect(response.status).toEqual(200)
     expect(response.body).toEqual({
