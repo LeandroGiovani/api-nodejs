@@ -9,7 +9,7 @@ import scalarAPIReference from '@scalar/fastify-api-reference'
 import { loginRoute } from './routes/login.ts'
 
 const server = fastify({
-  logger: {
+  logger: process.env.NODE_ENV === 'development' ? {
     transport: {
       target: 'pino-pretty',
       options: {
@@ -17,7 +17,7 @@ const server = fastify({
         ignore: 'pid,hostname',
       },
     },
-  },
+  } : false,
 }).withTypeProvider<ZodTypeProvider>()
 
 if (process.env.NODE_ENV === 'development') {
@@ -46,5 +46,10 @@ server.register(getCourseByIdRoute)
 server.register(getCoursesRoute)
 server.register(deleteCourseRoute)
 server.register(loginRoute)
+
+export default async function handler(req: any, res: any) {
+  await server.ready()
+  server.server.emit('request', req, res)
+}
 
 export { server }
